@@ -1,0 +1,57 @@
+services:
+  mongodb:
+    image: mongo:7.0
+    container_name: smartcampus-mongo
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    environment:
+      - MONGO_INITDB_DATABASE=smartcampus
+
+  ai-service:
+    build:
+      context: ./ai-service
+      dockerfile: Dockerfile
+    container_name: smartcampus-ai
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - PORT=8000
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
+    depends_on:
+      - mongodb
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: smartcampus-backend
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    environment:
+      - PORT=5000
+      - MONGODB_URI=mongodb://mongodb:27017/smartcampus
+      - JWT_SECRET=${JWT_SECRET:-smartcampus_super_secret_jwt_key_2026}
+      - AI_SERVICE_URL=http://ai-service:8000
+      - NODE_ENV=production
+    depends_on:
+      - mongodb
+      - ai-service
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: smartcampus-frontend
+    restart: unless-stopped
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+
+volumes:
+  mongodb_data:

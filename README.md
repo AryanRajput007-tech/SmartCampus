@@ -23,7 +23,7 @@ SmartCampus unifies the entire placement lifecycle into a cohesive, responsive w
 | **Frontend** | React 18, TypeScript, Vite, React Router v6, Axios, Modern Vanilla CSS Design Tokens |
 | **Backend** | Node.js, Express.js, TypeScript, Mongoose, JWT (jsonwebtoken), bcryptjs, CORS, Dotenv |
 | **Database** | MongoDB with Mongoose Schemas & Compound Unique Indexes |
-| **AI / ML Service** | Python 3.11+, FastAPI, Uvicorn, Scikit-learn (TF-IDF Vectorizer & Cosine Similarity), NumPy, Google Gemini API (`google-generativeai`) |
+| **AI / ML Service** | Python 3.11+, FastAPI, Uvicorn, Scikit-learn (TF-IDF Vectorizer & Cosine Similarity), NumPy, Google Gemini API (`google-genai`) |
 | **Testing** | Jest, Supertest, MongoDB Memory Server (`mongodb-memory-server`), Pytest, HTTPX |
 | **DevOps / Tooling** | Docker, Docker Compose, Git, GitHub |
 
@@ -32,7 +32,7 @@ SmartCampus unifies the entire placement lifecycle into a cohesive, responsive w
 ## 3. Architecture & Data Flow
 
 ```
-                 React + TypeScript SPA (Port 3000)
+                 React + TypeScript SPA (Port 5173)
                          |
                          | REST API / JSON (Bearer JWT)
                          v
@@ -190,7 +190,7 @@ The database seed script initializes the following test accounts:
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/smartcampus.git
+git clone https://github.com/AryanRajput007-tech/SmartCampus.git
 cd smartcampus
 
 # Copy environment files
@@ -259,7 +259,7 @@ npm install
 # Start Vite development server
 npm run dev
 ```
-Frontend runs at: `http://localhost:3000`
+Frontend runs at: `http://localhost:5173`
 
 ---
 
